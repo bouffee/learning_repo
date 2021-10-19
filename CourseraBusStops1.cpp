@@ -6,7 +6,6 @@ using namespace std;
 
 map < string, vector <string>> routes;
 
-
 void new_bus(map <string, vector <string>>& stops) {
 	string bus_name;
 	int bus_count;
@@ -18,7 +17,7 @@ void new_bus(map <string, vector <string>>& stops) {
 	}
 }
 
-map <string, vector<string>> buses_for_stop(map <string, vector <string>>& stops) {
+void buses_for_stop(map <string, vector <string>>& stops) {
 	int count = 0;
 	string stop;
 	cin >> stop;
@@ -31,7 +30,6 @@ map <string, vector<string>> buses_for_stop(map <string, vector <string>>& stops
 	}
 	if (count == 0) {
 		cout << "No stops" << endl;
-		return stops;
 	}
 	else {
 		cout << "Stop " << stop << ": ";
@@ -43,17 +41,15 @@ map <string, vector<string>> buses_for_stop(map <string, vector <string>>& stops
 			}
 		}
 		cout << endl;
-		return stops; 
 	}
 }
 
-map <string, vector <string>> stops_for_bus(map <string, vector <string>>& stops) {
+void stops_for_bus(map <string, vector <string>>& stops) {
 	string bus;
 	cin >> bus;
 	int count = 0;
 	if (stops.find(bus) == stops.end()) {
 		cout << "No buses" << endl;
-		return stops;
 	}
 	else {
 		cout << "Bus " << bus << ": ";
@@ -68,7 +64,6 @@ map <string, vector <string>> stops_for_bus(map <string, vector <string>>& stops
 				cout << endl;
 			}
 		}		
-		return stops;
 	}
 }
 
@@ -87,20 +82,19 @@ void all_buses(const map <string, vector <string>>& stops) {
 }
 
 int main() {
-	map <string, vector <string>> stops;
 	int n;
 	cin >> n;
 	string command;
 	for (int i = 1; i <= n; ++i) {
 		cin >> command;
 		if (command == "NEW_BUS") {
-			new_bus(stops);
+			new_bus(routes);
 		}
 		if (command == "BUSES_FOR_STOP") {
-			buses_for_stop(stops);
+			buses_for_stop(routes);
 		}
 		if (command == "STOPS_FOR_BUS") {
-			stops_for_bus(stops);
+			stops_for_bus(routes);
 		}
 		if (command == "ALL_BUSES") {
 			all_buses(routes);
