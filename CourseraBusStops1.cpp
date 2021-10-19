@@ -1,10 +1,27 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <set>
+#include <algorithm>
 
 using namespace std;
 
 map < string, vector <string>> routes;
+vector<string> bus_vec;
+
+void PrintRightBusOrder(vector<string>& bus_order, vector<std::string>& bus_in_scope){
+    vector<string> f;
+    for(auto& i : bus_order){
+        if(count(f.begin(), f.end(), i) == 0){
+            f.push_back(i);
+        }
+    }
+    for(auto elem : f){
+        for(auto item : bus_in_scope){
+            if(elem == item) cout << item << ' ';
+        }
+    }
+}
 
 void print_st_bus(map <string, vector <string>>& stops, vector <string>& st){
     for(const auto& elem : st){
@@ -26,16 +43,19 @@ void new_bus(map <string, vector <string>>& stops) {
         string bus;
         cin >> bus;
         stops[bus_name].push_back(bus);
+        bus_vec.push_back(bus_name);
     }
 }
 
 void buses_for_stop(map <string, vector <string>>& stops) {
     int count = 0;
+    vector<string> help_vec;
     string stop;
     cin >> stop;
     for (const auto& x : stops) {
         for (const auto& word : x.second) {
             if (word == stop) {
+                help_vec.push_back(x.first);
                 count++;
             }
         }
@@ -43,21 +63,14 @@ void buses_for_stop(map <string, vector <string>>& stops) {
     if (count == 0) {
         cout << "No stop" << endl;
     }
-    else {
-        for (const auto& x : stops) {
-            for (const auto& word : x.second) {
-                if (word == stop) {
-                    cout << x.first << " ";
-                }
-            }
-        }
-        cout << endl;
-    }
+    PrintRightBusOrder(bus_vec, help_vec);
+    cout << '\n';
 }
 
 void stops_for_bus(map <string, vector <string>>& stops) {
     string bus;
     cin >> bus;
+    vector<string> help_vec;
     int count = 0;
     if (stops.find(bus) == stops.end()) {
         cout << "No bus" << endl;
@@ -69,12 +82,14 @@ void stops_for_bus(map <string, vector <string>>& stops) {
                 if(piece.first != bus){
                     for(const auto item : piece.second){
                         if(item == elem){
-                            cout << piece.first << ' ';
+                            help_vec.push_back(piece.first);
                             ++count;
                         }
                     }
                 }
             }
+            PrintRightBusOrder(bus_vec, help_vec);
+            help_vec.clear();
             if(count == 0){
                 cout << "no interchange";
             }
