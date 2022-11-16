@@ -22,7 +22,9 @@
 # Для каждого запроса выведите в отдельной строке слово "Yes", если класс 1 является предком класса 2, и "No", если не является.
 
 
-all_classes = dict()
+all_classes = dict()  # dictionary for all classes
+
+# first input with declaring classes and their parents/children
 
 n1 = int(input())
 for i in range(n1):
@@ -33,21 +35,25 @@ for i in range(n1):
       for item in parent:
          all_classes[child].append(item)
 
+# transformation of the dictionary. Adding to child all his parents
+
 for key_1, value_1 in all_classes.items():
    for key_2, value_2 in all_classes.items():
       if key_1 in value_2:
          for item in value_1:
             value_2.append(item)
 
+# second input part with checking is first class is parent of second class
+
 n2 = int(input())
 for i in range(n2):
    check_child, check_parent = input().split()
-   if check_parent not in all_classes.keys():
+   if check_child not in all_classes.keys():  # check if actually child was declared before
       print('No')
       continue
-   elif check_parent == check_child:
+   elif check_parent == check_child:  # if parent and child are the same then they are parent and child of each other
       print('Yes')
-   elif check_child in all_classes[check_parent]:
+   elif check_child in all_classes[check_parent]:  # check if child is in list of parent class' children
       print('Yes')
    else:
       print('No')

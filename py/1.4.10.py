@@ -18,15 +18,9 @@
 # Запросы выполняются в порядке, в котором они даны во входных данных.
 # Имена пространства имен и имена переменных представляют из себя строки длины не более 10, состоящие из строчных латинских букв.
 
-spaces = {'global': {'parent': None, 'variables': set()}}
+spaces = {'global': {'parent': None, 'variables': set()}}  # nested dictionary with all spaces
 
-
-def check(namespace, arg):
-    if arg in spaces[namespace]['variables']:
-        return True
-    else:
-        return False
-
+# functions that asked in task
 
 def create(namespace, parent):
     spaces[namespace] = {'parent': parent, 'variables': set()}
@@ -45,6 +39,7 @@ def get_space(namespace, arg):
     else:
         return None
 
+# input part
 
 n = int(input())
 for i in range(n):
@@ -55,15 +50,3 @@ for i in range(n):
         add_arg(arg1, arg2)
     elif command == 'get':
         print(get_space(arg1, arg2))
-
-# for key, item in spaces.items():
-#     print('key: ', key, '\nitem: ', item, end='\n')
-
-
-
-
-
-
-
-
-
