@@ -53,10 +53,10 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # INITIALIZATION OF COLUMN VECTOR b
         self.column_vector = self.lineEdit_3.text().strip().split(',')
 
-        print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
-        print('MATRIX:')
-        print(self.matrix)
-        print('b = ', self.column_vector)
+        # print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
+        # print('MATRIX:')
+        # print(self.matrix)
+        # print('b = ', self.column_vector)
 
     def OpenDialog(self):
         self.dialog.show()
