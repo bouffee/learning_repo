@@ -2,9 +2,10 @@ import sys
 from PyQt5 import QtWidgets
 import design
 import dialog_window
+import random
 
 checkboxesStatus = {'Gauss': False, 'Kramer': False, 'Jacobi': False, 'Seidel': False, 'Unnamed': False}
-
+MAX_SIZE_RANDOM = 10
 
 class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
     def __init__(self, parent=None):
@@ -24,9 +25,10 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.checkBox_4.stateChanged.connect(lambda:self.changeCheckBoxStatus('Seidel', self.checkBox_4))
         self.checkBox_5.stateChanged.connect(lambda:self.changeCheckBoxStatus('Unnamed', self.checkBox_5))
 
-        # BUTTON
+        # BUTTONS
         self.pushButton.clicked.connect(self.OpenDialog)
         self.pushButton_3.clicked.connect(self.GetVariables)
+        self.pushButton_2.clicked.connect(self.randomVariables)
         self.dialog = Dialog(self)
 
 
@@ -52,6 +54,28 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
         # INITIALIZATION OF COLUMN VECTOR b
         self.column_vector = self.lineEdit_3.text().strip().split(',')
+
+        # print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
+        # print('MATRIX:')
+        # print(self.matrix)
+        # print('b = ', self.column_vector)
+
+    def randomVariables(self):
+        self.matrixSize_n = random.randint(1, MAX_SIZE_RANDOM)
+        self.matrixSize_m = random.randint(1, MAX_SIZE_RANDOM)
+        self.matrix = list()
+
+        for i in range(self.matrixSize_n):
+            self.matrix.append(list())
+
+        self.count = 0
+
+        for i in range(self.matrixSize_n):
+            for j in range(self.matrixSize_m):
+                self.matrix[i].append(random.random() * MAX_SIZE_RANDOM)
+                self.count += 1
+
+        self.column_vector = [random.random() * MAX_SIZE_RANDOM for i in range(self.matrixSize_n)]
 
         # print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
         # print('MATRIX:')
