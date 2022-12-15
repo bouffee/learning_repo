@@ -3,6 +3,7 @@ from PyQt5 import QtWidgets
 import design
 import dialog_window
 import random
+# import gauss
 
 checkboxesStatus = {'Gauss': False, 'Kramer': False, 'Jacobi': False, 'Seidel': False, 'Unnamed': False}
 MAX_SIZE_RANDOM = 10
@@ -11,12 +12,24 @@ class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        self.lineEdit.setReadOnly(True)
+        # self.lineEdit.setText(self.answer)
 
 
 class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def __init__(self):
         super().__init__()
+        self.matrixSize_n = None
+        self.matrixSize_m = None
+        self.matrixOdds = None
+        self.matrix = None
+        self.column_vector = None
         self.setupUi(self)
+
+        # HINT FOR TYPING
+        self.lineEdit.setPlaceholderText('Введите размер матрицы m*n через запятую')
+        self.lineEdit_2.setPlaceholderText('Введите коэффициенты матрицы через запятую')
+        self.lineEdit_3.setPlaceholderText('Введите вектор b, размер = n')
 
         # CHECKBOXES TRIGGERS ZONE
         self.checkBox.stateChanged.connect(lambda:self.changeCheckBoxStatus('Gauss', self.checkBox))
@@ -55,10 +68,10 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # INITIALIZATION OF COLUMN VECTOR b
         self.column_vector = self.lineEdit_3.text().strip().split(',')
 
-        # print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
-        # print('MATRIX:')
-        # print(self.matrix)
-        # print('b = ', self.column_vector)
+        print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
+        print('MATRIX:')
+        print(self.matrix)
+        print('b = ', self.column_vector)
 
     def randomVariables(self):
         self.matrixSize_n = random.randint(1, MAX_SIZE_RANDOM)
@@ -77,10 +90,10 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
         self.column_vector = [random.random() * MAX_SIZE_RANDOM for i in range(self.matrixSize_n)]
 
-        # print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
-        # print('MATRIX:')
-        # print(self.matrix)
-        # print('b = ', self.column_vector)
+        print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
+        print('MATRIX:')
+        print(self.matrix)
+        print('b = ', self.column_vector)
 
     def OpenDialog(self):
         self.dialog.show()
