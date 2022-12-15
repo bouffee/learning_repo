@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'design2.ui'
+# Form implementation generated from reading ui file 'design.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(386, 473)
+        MainWindow.resize(523, 473)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -67,6 +67,9 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.widget_2)
         self.pushButton.setGeometry(QtCore.QRect(9, 72, 351, 31))
         self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(self.widget_2)
+        self.pushButton_2.setGeometry(QtCore.QRect(10, 110, 351, 31))
+        self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout_2.addWidget(self.widget_2, 0, QtCore.Qt.AlignTop)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -83,44 +86,7 @@ class Ui_MainWindow(object):
         self.checkBox.setText(_translate("MainWindow", "Метод Гаусса"))
         self.checkBox_2.setText(_translate("MainWindow", "Метод Крамера"))
         self.checkBox_3.setText(_translate("MainWindow", "Метод Якоби"))
-        self.checkBox_4.setText(_translate("MainWindow", "Метод Зейделя"))
+        self.checkBox_4.setText(_translate("MainWindow", "Метод Зейнглера"))
         self.checkBox_5.setText(_translate("MainWindow", "CheckBox"))
         self.pushButton.setText(_translate("MainWindow", "Выполнить"))
-
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Ответ")
-        Dialog.resize(660, 236)
-        self.horizontalLayout = QtWidgets.QHBoxLayout(Dialog)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.widget = QtWidgets.QWidget(Dialog)
-        self.widget.setObjectName("widget")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.graphicsView = QtWidgets.QGraphicsView(self.widget)
-        self.graphicsView.setMinimumSize(QtCore.QSize(400, 200))
-        self.graphicsView.setObjectName("graphicsView")
-        self.horizontalLayout_2.addWidget(self.graphicsView)
-        self.horizontalLayout.addWidget(self.widget, 0, QtCore.Qt.AlignLeft)
-        self.widget_2 = QtWidgets.QWidget(Dialog)
-        self.widget_2.setObjectName("widget_2")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_2)
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.lineEdit = QtWidgets.QLineEdit(self.widget_2)
-        self.lineEdit.setMinimumSize(QtCore.QSize(200, 200))
-        self.lineEdit.setObjectName("lineEdit")
-        self.horizontalLayout_3.addWidget(self.lineEdit, 0, QtCore.Qt.AlignTop)
-        self.horizontalLayout.addWidget(self.widget_2)
-
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-
-
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     MainWindow = QtWidgets.QMainWindow()
-#     ui = Ui_MainWindow()
-#     ui.setupUi(MainWindow)
-#     MainWindow.show()
-#     sys.exit(app.exec_())
+        self.pushButton_2.setText(_translate("MainWindow", "Случайные значения"))
