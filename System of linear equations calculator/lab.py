@@ -13,6 +13,7 @@ class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
         super().__init__(parent)
         self.setupUi(self)
         self.lineEdit.setReadOnly(True)
+        # self.answer = 'heheehehe'
         # self.lineEdit.setText(self.answer)
 
 
@@ -105,6 +106,9 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         else:
             checkboxesStatus[key] = False
             print(checkboxesStatus)
+
+    # def countAnswer(self):
+
 
 
 def main():

@@ -85,7 +85,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Решение СЛАУ"))
         self.label.setText(_translate("MainWindow", "Введите размер матрицы: "))
         self.label_2.setText(_translate("MainWindow", "Введите коэффициенты матрицы:"))
-        self.label_3.setText(_translate("MainWindow", "Введите матрицу свободных членов:"))
+        self.label_3.setText(_translate("MainWindow", "Введите вектор свободных членов:"))
         self.pushButton_3.setText(_translate("MainWindow", "Ввести значения"))
         self.pushButton_2.setText(_translate("MainWindow", "Случайные значения"))
         self.label_4.setText(_translate("MainWindow", "Выберите метод решения: "))
