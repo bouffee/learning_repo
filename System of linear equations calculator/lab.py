@@ -13,23 +13,9 @@ class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
 
 
 class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
-    def changeCheckBoxStatus(self, key, cb):
-        if cb.isChecked():
-            checkboxesStatus[key] = True
-            print(checkboxesStatus)
-        else:
-            checkboxesStatus[key] = False
-            print(checkboxesStatus)
-
-    def OpenDialog(self):
-        self.dialog.show()
-
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-
-        self.pushButton.clicked.connect(self.OpenDialog)
-        self.dialog = Dialog(self)
 
         # CHECKBOXES TRIGGERS ZONE
         self.checkBox.stateChanged.connect(lambda:self.changeCheckBoxStatus('Gauss', self.checkBox))
@@ -37,6 +23,51 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.checkBox_3.stateChanged.connect(lambda:self.changeCheckBoxStatus('Jacobi', self.checkBox_3))
         self.checkBox_4.stateChanged.connect(lambda:self.changeCheckBoxStatus('Seidel', self.checkBox_4))
         self.checkBox_5.stateChanged.connect(lambda:self.changeCheckBoxStatus('Unnamed', self.checkBox_5))
+
+        # BUTTON
+        self.pushButton.clicked.connect(self.OpenDialog)
+        self.pushButton_3.clicked.connect(self.GetVariables)
+        self.dialog = Dialog(self)
+
+
+    def GetVariables(self):
+        # SIZE OF MATRIX, m - WEIGHT, n - HEIGHT
+        self.inp = list()
+        self.inp = self.lineEdit.text().strip().split(',')
+        self.matrixSize_n = int(self.inp[1])
+        self.matrixSize_m = int(self.inp[0])
+        self.matrixOdds = self.lineEdit_2.text().strip().split(',')
+
+        # MAKE A 2D ARRAY FROM A LIST
+        self.matrix = list()
+
+        for i in range(self.matrixSize_n):
+            self.matrix.append(list())
+
+        self.count = 0
+        for i in range(self.matrixSize_n):
+            for j in range(self.matrixSize_m):
+                self.matrix[i].append(self.matrixOdds[self.count])
+                self.count += 1
+
+        # INITIALIZATION OF COLUMN VECTOR b
+        self.column_vector = self.lineEdit_3.text().strip().split(',')
+
+        print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
+        print('MATRIX:')
+        print(self.matrix)
+        print('b = ', self.column_vector)
+
+    def OpenDialog(self):
+        self.dialog.show()
+
+    def changeCheckBoxStatus(self, key, cb):
+        if cb.isChecked():
+            checkboxesStatus[key] = True
+            print(checkboxesStatus)
+        else:
+            checkboxesStatus[key] = False
+            print(checkboxesStatus)
 
 
 def main():
