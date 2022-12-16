@@ -44,4 +44,4 @@ jobs:
       with:
         name: ${{ runner.os }} Build
         path: |
-          SystemOfLinearEquationsCalculator/dist/*
+          dist/*
