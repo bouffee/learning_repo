@@ -9,6 +9,7 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 import copy
+import kramer
 
 checkboxesStatus = {'Gauss': False, 'Kramer': False, 'Jacobi': False, 'Seidel': False, 'Unnamed': False}
 MAX_SIZE_RANDOM = 100
@@ -18,10 +19,20 @@ class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
         super().__init__(parent)
         self.setupUi(self)
         # self.answer
-        self.plainTextEdit.setReadOnly(True)
         # self.answer = 'heheehehe'
-        self.answer = 'heheehehe' + "\n" + "lakjsdhflkjahwsdflkj"
         # self.lineEdit.setText(self.answer)
+
+        # DEFAULT ANSWERS FIELDS
+        self.plainTextEdit.setReadOnly(True)
+        self.plainTextEdit.setPlaceholderText('Метод не был выбран.')
+        self.kramer_answer.setReadOnly(True)
+        self.kramer_answer.setPlaceholderText('Метод не был выбран.')
+        self.jacobi_answer.setReadOnly(True)
+        self.jacobi_answer.setPlaceholderText('Метод не был выбран.')
+        self.seidel_answer.setReadOnly(True)
+        self.seidel_answer.setPlaceholderText('Метод не был выбран.')
+        self.unnamed_answer.setReadOnly(True)
+        self.unnamed_answer.setPlaceholderText('Метод не был выбран.')
 
     def startCalculation(self, A, B, extra):
         res = "Method not found"
@@ -33,6 +44,14 @@ class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
             calc_time = time.time() - start_time
             print("Answer", res)
             [self.plainTextEdit.appendPlainText(str(tmp)) for tmp in res]
+
+        # if checkboxesStatus['Kramer']:
+        #     print(A, B)
+        #     start_time = time.time()
+        #     res = kramer.getMatrixDeternminant(A)
+        #     calc_time = time.time() - start_time
+        #     print('Answer', res)
+        #     [self.kramer_answer.appendPlainText(str(tmp)) for tmp in res]
         # self.answer = "".join([str(tmp)+"\n" for tmp in res])
         [self.plainTextEdit.appendPlainText(str(tmp)) for tmp in res]
         # self.plainTextEdit.setText(self.answer)
