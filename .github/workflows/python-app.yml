@@ -33,15 +33,15 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r src/requirements.txt
+        pip install -r SystemOfLinearEquationsCalculator/requirements.txt
 
     - name: Build via pyinstaller
       run: |
-        pyinstaller -F src/lab.py
+        pyinstaller -F SystemOfLinearEquationsCalculator/lab.py
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: ${{ runner.os }} Build
         path: |
-          dist/*
+          SystemOfLinearEquationsCalculator/dist/*
