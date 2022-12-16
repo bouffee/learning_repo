@@ -1,0 +1,47 @@
+name: Python SystemOfLinearEquationsCalculator application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Check-out repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        architecture: 'x64'
+        cache: 'pip'
+        cache-dependency-path: |
+          **/requirements*.txt
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r SystemOfLinearEquationsCalculator/requirements.txt
+
+    - name: Build via pyinstaller
+      run: |
+        pyinstaller -F SystemOfLinearEquationsCalculator/lab.py
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ runner.os }} Build
+        path: |
+          dist/*
