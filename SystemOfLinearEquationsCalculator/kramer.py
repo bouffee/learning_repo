@@ -12,9 +12,9 @@ def getMatrixDeternminant(m):
         determinant += ((-1)**c)*m[0][c]*getMatrixDeternminant(getMatrixMinor(m,0,c))
     return determinant
 
-M = [[4,1,1,2,1],
-     [1,2,-1,1,1],
-     [3,1,1,1,1],
-     [2,1,1,4,1],
-     [2,-1,1,1,5]]
-print(getMatrixDeternminant(M))
+# M = [[4,1,1,2,1],
+#      [1,2,-1,1,1],
+#      [3,1,1,1,1],
+#      [2,1,1,4,1],
+#      [2,-1,1,1,5]]
+# print(getMatrixDeternminant(M))

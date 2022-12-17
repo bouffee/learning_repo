@@ -38,11 +38,11 @@ class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
         res = "Method not found"
         self.plainTextEdit.appendPlainText("Size: " + str(len(A)*2))
         if checkboxesStatus['Gauss']:
-            print(A, B)
+            # print(A, B)
             start_time = time.time()
             res = gauss.Gauss(A, B)
             calc_time = time.time() - start_time
-            print("Answer", res)
+            # print("Answer", res)
             [self.plainTextEdit.appendPlainText(str(tmp)) for tmp in res]
 
         # if checkboxesStatus['Kramer']:
@@ -70,7 +70,7 @@ class DialogAskEps(QtWidgets.QDialog, dialog_window_eps.Ui_Dialog):
 
     def takeEps(self):
         self.eps = int(self.lineEdit.text())
-        print(self.eps)
+        # print(self.eps)
         self.hide()
 
 
@@ -131,10 +131,10 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # INITIALIZATION OF COLUMN VECTOR b
         self.column_vector = self.lineEdit_3.text().strip().split(',')
 
-        print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
-        print('MATRIX:')
-        print(self.matrix)
-        print('b = ', self.column_vector)
+        # print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
+        # print('MATRIX:')
+        # print(self.matrix)
+        # print('b = ', self.column_vector)
 
     def randomDifferentSize(self):
         for i in range(1, MAX_SIZE_RANDOM):
@@ -176,10 +176,10 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
         self.column_vector = [random.random() * MAX_SIZE_RANDOM for i in range(self.matrixSize_n)]
 
-        print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
-        print('MATRIX:')
-        print(self.matrix)
-        print('b = ', self.column_vector)
+        # print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
+        # print('MATRIX:')
+        # print(self.matrix)
+        # print('b = ', self.column_vector)
 
     def OpenDialogAnswer(self):
         calc_time_list = []
@@ -192,7 +192,7 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.dialog.show()
         t = np.array(size)
         s = np.array(calc_time_list)
-        print(t, s)
+        # print(t, s)
         fig, ax = plt.subplots()
         ax.plot(t, s)
 
@@ -208,10 +208,10 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def changeCheckBoxStatus(self, key, cb):
         if cb.isChecked():
             checkboxesStatus[key] = True
-            print(checkboxesStatus)
+            # print(checkboxesStatus)
         else:
             checkboxesStatus[key] = False
-            print(checkboxesStatus)
+            # print(checkboxesStatus)
 
     # def countAnswer(self):
 
