@@ -1,6 +1,6 @@
 from collections.abc import Sequence, MutableSequence
 
-
+MAX_ITER = 1000
 def Jacobi(
         A: Sequence[Sequence[float]],
         b: Sequence[float],
@@ -35,10 +35,11 @@ def Jacobi(
 
     x: list[float] = [-(sum(a, y, i) - b[i])/A[i][i]
                       for i, a in enumerate(A)]
-
-    while norm(y, x) > eps:
+    itr = 0
+    while norm(y, x) > eps and itr < MAX_ITER:
         for i, elem in enumerate(x):
             y[i] = elem
         for i, a in enumerate(A):
             x[i] = -(sum(a, y, i) - b[i])/A[i][i]
+        itr+=1
     return x

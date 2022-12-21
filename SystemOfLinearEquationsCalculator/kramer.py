@@ -1,4 +1,5 @@
 # рекурсивный код Python для нахождения определителя матрицы.
+import copy
 def getMatrixMinor(m,i,j):
     return [row[:j] + row[j+1:] for row in (m[:i]+m[i+1:])]
 
@@ -18,3 +19,16 @@ def getMatrixDeternminant(m):
 #      [2,1,1,4,1],
 #      [2,-1,1,1,5]]
 # print(getMatrixDeternminant(M))
+def calculateKramer(A, B):
+    det = getMatrixDeternminant(A)
+    res = []
+    print(B)
+    print(A)
+    for i in range(len(B)):
+        tmp = copy.deepcopy(A)
+        for j in range(len(B)):
+             tmp[j][i] = B[j]
+        print(tmp, i, A, B)
+        det_tmp = getMatrixDeternminant(tmp)
+        res.append(det_tmp/det)
+    return res

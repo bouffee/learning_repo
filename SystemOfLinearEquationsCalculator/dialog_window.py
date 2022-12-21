@@ -22,46 +22,86 @@ class Ui_Dialog(object):
         self.gauss.setGeometry(QtCore.QRect(10, 30, 274, 210))
         self.gauss.setObjectName("gauss")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(self.gauss)
-        self.plainTextEdit.setGeometry(QtCore.QRect(10, 10, 256, 192))
+        self.plainTextEdit.setGeometry(QtCore.QRect(0, 10, 256, 192))
+        self.plainTextEdit.setMinimumSize(QtCore.QSize(256, 192))
+        self.plainTextEdit.setMaximumSize(QtCore.QSize(256, 192))
+        self.plainTextEdit.setStyleSheet("QPlainTextEdit{    \n"
+"    font: 14pt \"Segoe UI Semilight\";\n"
+"}")
         self.plainTextEdit.setObjectName("plainTextEdit")
         self.kramer = QtWidgets.QWidget(Dialog)
         self.kramer.setGeometry(QtCore.QRect(300, 30, 271, 211))
         self.kramer.setObjectName("kramer")
         self.kramer_answer = QtWidgets.QPlainTextEdit(self.kramer)
-        self.kramer_answer.setGeometry(QtCore.QRect(0, 10, 271, 191))
+        self.kramer_answer.setGeometry(QtCore.QRect(0, 10, 256, 192))
+        self.kramer_answer.setMinimumSize(QtCore.QSize(256, 192))
+        self.kramer_answer.setMaximumSize(QtCore.QSize(256, 192))
+        self.kramer_answer.setStyleSheet("QPlainTextEdit{    \n"
+"    font: 14pt \"Segoe UI Semilight\";\n"
+"}")
         self.kramer_answer.setObjectName("kramer_answer")
         self.jacobi = QtWidgets.QWidget(Dialog)
-        self.jacobi.setGeometry(QtCore.QRect(590, 30, 281, 201))
+        self.jacobi.setGeometry(QtCore.QRect(590, 30, 281, 211))
         self.jacobi.setObjectName("jacobi")
         self.jacobi_answer = QtWidgets.QPlainTextEdit(self.jacobi)
-        self.jacobi_answer.setGeometry(QtCore.QRect(10, 10, 271, 191))
+        self.jacobi_answer.setGeometry(QtCore.QRect(10, 10, 256, 192))
+        self.jacobi_answer.setMinimumSize(QtCore.QSize(256, 192))
+        self.jacobi_answer.setMaximumSize(QtCore.QSize(256, 192))
+        self.jacobi_answer.setStyleSheet("QPlainTextEdit{    \n"
+"    font: 14pt \"Segoe UI Semilight\";\n"
+"}")
         self.jacobi_answer.setObjectName("jacobi_answer")
         self.seidel = QtWidgets.QWidget(Dialog)
-        self.seidel.setGeometry(QtCore.QRect(10, 270, 274, 210))
+        self.seidel.setGeometry(QtCore.QRect(10, 279, 271, 201))
         self.seidel.setObjectName("seidel")
         self.seidel_answer = QtWidgets.QPlainTextEdit(self.seidel)
-        self.seidel_answer.setGeometry(QtCore.QRect(10, 10, 256, 192))
+        self.seidel_answer.setGeometry(QtCore.QRect(0, 0, 256, 192))
+        self.seidel_answer.setMinimumSize(QtCore.QSize(256, 192))
+        self.seidel_answer.setMaximumSize(QtCore.QSize(256, 192))
+        self.seidel_answer.setStyleSheet("QPlainTextEdit{    \n"
+"    font: 14pt \"Segoe UI Semilight\";\n"
+"}")
         self.seidel_answer.setObjectName("seidel_answer")
         self.unnamed = QtWidgets.QWidget(Dialog)
         self.unnamed.setGeometry(QtCore.QRect(300, 270, 274, 210))
         self.unnamed.setObjectName("unnamed")
         self.unnamed_answer = QtWidgets.QPlainTextEdit(self.unnamed)
         self.unnamed_answer.setGeometry(QtCore.QRect(0, 10, 256, 192))
+        self.unnamed_answer.setMinimumSize(QtCore.QSize(256, 192))
+        self.unnamed_answer.setMaximumSize(QtCore.QSize(256, 192))
+        self.unnamed_answer.setStyleSheet("QPlainTextEdit{    \n"
+"    font: 14pt \"Segoe UI Semilight\";\n"
+"}")
         self.unnamed_answer.setObjectName("unnamed_answer")
         self.gauss_label = QtWidgets.QLabel(Dialog)
         self.gauss_label.setGeometry(QtCore.QRect(10, 10, 271, 16))
+        self.gauss_label.setStyleSheet("QLabel{    \n"
+"    font: 11pt \"Segoe UI Semilight\";\n"
+"}")
         self.gauss_label.setObjectName("gauss_label")
         self.kramer_label = QtWidgets.QLabel(Dialog)
         self.kramer_label.setGeometry(QtCore.QRect(300, 10, 271, 16))
+        self.kramer_label.setStyleSheet("QLabel{    \n"
+"    font: 11pt \"Segoe UI Semilight\";\n"
+"}")
         self.kramer_label.setObjectName("kramer_label")
         self.jacobi_label = QtWidgets.QLabel(Dialog)
         self.jacobi_label.setGeometry(QtCore.QRect(600, 10, 281, 20))
+        self.jacobi_label.setStyleSheet("QLabel{    \n"
+"    font: 11pt \"Segoe UI Semilight\";\n"
+"}")
         self.jacobi_label.setObjectName("jacobi_label")
         self.seidel_label = QtWidgets.QLabel(Dialog)
-        self.seidel_label.setGeometry(QtCore.QRect(20, 250, 271, 16))
+        self.seidel_label.setGeometry(QtCore.QRect(10, 250, 271, 16))
+        self.seidel_label.setStyleSheet("QLabel{    \n"
+"    font: 11pt \"Segoe UI Semilight\";\n"
+"}")
         self.seidel_label.setObjectName("seidel_label")
         self.unnamed_label = QtWidgets.QLabel(Dialog)
         self.unnamed_label.setGeometry(QtCore.QRect(300, 250, 271, 16))
+        self.unnamed_label.setStyleSheet("QLabel{    \n"
+"    font: 11pt \"Segoe UI Semilight\";\n"
+"}")
         self.unnamed_label.setObjectName("unnamed_label")
 
         self.retranslateUi(Dialog)

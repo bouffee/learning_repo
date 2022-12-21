@@ -3,16 +3,18 @@ from PyQt5 import QtWidgets
 import design
 import dialog_window
 import random
-import dialog_window_eps
 import gauss
 import time
 import matplotlib.pyplot as plt
 import numpy as np
 import copy
 import kramer
+import seidel
+import jacobi
 
 checkboxesStatus = {'Gauss': False, 'Kramer': False, 'Jacobi': False, 'Seidel': False, 'Unnamed': False}
-MAX_SIZE_RANDOM = 100
+MAX_SIZE_RANDOM = 10
+eps = 0.001
 
 class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
     def __init__(self, parent=None):
@@ -37,14 +39,55 @@ class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
     def startCalculation(self, A, B, extra):
         res = "Method not found"
         self.plainTextEdit.appendPlainText("Size: " + str(len(A)*2))
+        self.kramer_answer.appendPlainText("Size: " + str(len(A) * 2))
+        self.seidel_answer.appendPlainText("Size: " + str(len(A) * 2))
+        self.jacobi_answer.appendPlainText("Size: " + str(len(A) * 2))
+        print(A, B)
+        calc_time_stat = {}
         if checkboxesStatus['Gauss']:
+            print('Gauss')
             # print(A, B)
+            a = copy.copy(A)
+            b = copy.copy(B)
             start_time = time.time()
-            res = gauss.Gauss(A, B)
+            res = gauss.Gauss(a, b)
             calc_time = time.time() - start_time
+            calc_time_stat['Gauss'] = calc_time
             # print("Answer", res)
             [self.plainTextEdit.appendPlainText(str(tmp)) for tmp in res]
-
+        if checkboxesStatus['Kramer']:
+            # print(A, B)
+            print("Kramer")
+            a = copy.copy(A)
+            b = copy.copy(B)
+            start_time = time.time()
+            res = kramer.calculateKramer(a, b)
+            calc_time = time.time() - start_time
+            calc_time_stat['Kramer'] = calc_time
+            # print("Answer", res)
+            [self.kramer_answer.appendPlainText(str(tmp)) for tmp in res]
+        if checkboxesStatus['Seidel']:
+            print("Seidel")
+            a = copy.copy(A)
+            b = copy.copy(B)
+            start_time = time.time()
+            print(extra)
+            res = seidel.seidel(a, b, extra['Seidel'])
+            calc_time = time.time() - start_time
+            calc_time_stat['Seidel'] = calc_time
+            # print("Answer", res)
+            [self.seidel_answer.appendPlainText(str(tmp)) for tmp in res]
+        if checkboxesStatus['Jacobi']:
+            print("Jacobi")
+            a = copy.copy(A)
+            b = copy.copy(B)
+            start_time = time.time()
+            print(extra)
+            res = jacobi.Jacobi(a, b, extra['Jacobi'])
+            calc_time = time.time() - start_time
+            calc_time_stat['Jacobi'] = calc_time
+            # print("Answer", res)
+            [self.jacobi_answer.appendPlainText(str(tmp)) for tmp in res]
         # if checkboxesStatus['Kramer']:
         #     print(A, B)
         #     start_time = time.time()
@@ -53,26 +96,10 @@ class Dialog(QtWidgets.QDialog, dialog_window.Ui_Dialog):
         #     print('Answer', res)
         #     [self.kramer_answer.appendPlainText(str(tmp)) for tmp in res]
         # self.answer = "".join([str(tmp)+"\n" for tmp in res])
-        [self.plainTextEdit.appendPlainText(str(tmp)) for tmp in res]
+        # [self.plainTextEdit.appendPlainText(str(tmp)) for tmp in res]
         # self.plainTextEdit.setText(self.answer)
         # pass
-        return calc_time
-
-class DialogAskEps(QtWidgets.QDialog, dialog_window_eps.Ui_Dialog):
-    def __init__(self, parent = None):
-        super().__init__(parent)
-        self.setFixedSize(168, 85)
-        self.setupUi(self)
-        self.lineEdit.setPlaceholderText('Введите значение эпсилон')
-
-        # BUTTON ACTIONS
-        self.pushButton.clicked.connect(self.takeEps)
-
-    def takeEps(self):
-        self.eps = int(self.lineEdit.text())
-        # print(self.eps)
-        self.hide()
-
+        return calc_time_stat
 
 
 class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
@@ -85,7 +112,6 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.column_vector = None
         self.matrix_list = []
         self.column_vector_list = []
-        self.eps = None
         self.setupUi(self)
 
         # HINT FOR TYPING
@@ -99,7 +125,6 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.checkBox_3.stateChanged.connect(lambda:self.changeCheckBoxStatus('Jacobi', self.checkBox_3))
         self.checkBox_4.stateChanged.connect(lambda:self.changeCheckBoxStatus('Seidel', self.checkBox_4))
         self.checkBox_5.stateChanged.connect(lambda:self.changeCheckBoxStatus('Unnamed', self.checkBox_5))
-        self.dialog_eps = DialogAskEps(self)
 
         # BUTTONS
         self.pushButton.clicked.connect(self.OpenDialogAnswer)
@@ -137,7 +162,7 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # print('b = ', self.column_vector)
 
     def randomDifferentSize(self):
-        for i in range(1, MAX_SIZE_RANDOM):
+        for i in range(3, MAX_SIZE_RANDOM):
             self.randomVariables(i)
             self.matrix_list.append(copy.deepcopy(self.matrix))
             self.column_vector_list.append(copy.deepcopy(self.column_vector))
@@ -159,7 +184,7 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def randomVariables(self, size=None):
         # self.matrixSize_n = random.randint(1, MAX_SIZE_RANDOM)
         if size is None:
-            self.matrixSize_n = self.matrixSize_m = random.randint(2, MAX_SIZE_RANDOM)
+            self.matrixSize_n = self.matrixSize_m = random.randint(3, MAX_SIZE_RANDOM)
         else:
             self.matrixSize_n = self.matrixSize_m = size
         self.matrix = list()
@@ -171,10 +196,10 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
         for i in range(self.matrixSize_n):
             for j in range(self.matrixSize_m):
-                self.matrix[i].append(random.random() * MAX_SIZE_RANDOM)
+                self.matrix[i].append(random.randint(1, MAX_SIZE_RANDOM))
                 self.count += 1
 
-        self.column_vector = [random.random() * MAX_SIZE_RANDOM for i in range(self.matrixSize_n)]
+        self.column_vector = [random.randint(1, MAX_SIZE_RANDOM) for i in range(self.matrixSize_n)]
 
         # print('n = ', self.matrixSize_n, 'm = ', self.matrixSize_m)
         # print('MATRIX:')
@@ -182,28 +207,33 @@ class CalculatorApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # print('b = ', self.column_vector)
 
     def OpenDialogAnswer(self):
-        calc_time_list = []
+        global eps
+        calc_time_stat = {'Gauss': [], 'Kramer': [], 'Jacobi': [], 'Seidel': [], 'Unnamed': []}
         size = [len(mat)*2 for mat in self.matrix_list]
         if len(self.matrix_list) != 0:
             for i in range(len(self.matrix_list)):
-                calc_time = self.dialog.startCalculation(self.matrix_list[i], self.column_vector_list[i], [])
-                calc_time_list.append(calc_time)
-
+                res = self.dialog.startCalculation(self.matrix_list[i], self.column_vector_list[i],
+                                                   {'Seidel': eps, 'Jacobi':eps})
+                print(res)
+                for method in res:
+                    calc_time_stat[method].append(res[method])
         self.dialog.show()
+        print(calc_time_stat)
+        {self.showTimeStat(calc_time_stat[name], size, name) for name in calc_time_stat if len(calc_time_stat[name]) == size}
+        plt.show()
+        print('asd')
+
+    def showTimeStat(self, calc_time, size, method):
         t = np.array(size)
-        s = np.array(calc_time_list)
+        s = np.array(calc_time)
         # print(t, s)
         fig, ax = plt.subplots()
         ax.plot(t, s)
 
-        ax.set(xlabel='size', ylabel='Time (s)')
+        ax.set_title(method)
+        ax.set(xlabel='size', ylabel='Time (s)',)
         ax.grid()
-
         # fig.savefig("test.png")
-        plt.show()
-
-    def OpenDialogAskEps(self):
-        self.dialog_eps.show()
 
     def changeCheckBoxStatus(self, key, cb):
         if cb.isChecked():
