@@ -6,7 +6,7 @@
   <li>SystemOfLinearEquationsCalculator задания для университета.</li>
   <li><a href="https://stepik.org/course/67/">"Программирование на Python"</a></li>
   <li><a href="https://stepik.org/course/512/">"Python: основы и применения"</a></li>
-  <li>Яндекс .Практикум. Инженер данных: <a href=https://practicum.yandex.ru/data-engineer/>тут</a></li>
+  <li>Яндекс.Практикум. Инженер данных: <a href=https://practicum.yandex.ru/data-engineer/>тут</a></li>
 </ul>
 <h1>Learning repository</h1>
 <p>Here i collected all my learning tasks that I have ever made on courses.</p>
